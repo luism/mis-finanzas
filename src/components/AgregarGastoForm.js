@@ -1,17 +1,15 @@
 import React, {Component} from 'react'
 import { Button } from 'react-bootstrap'
 
-class NameForm extends Component {
+class AgregarGastoForm extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
+        super(props)
+        this.status = {
             value: {
                 concepto: '',
                 monto: 0
             }
-        };
-        this.handleChange.bind(this)
-        this.handleSubmit.bind(this)
+        }
     }
 
     handleChange(event) {
@@ -34,10 +32,14 @@ class NameForm extends Component {
                     Monto:
                     <input type='text' value={this.state.value.monto} onChange={this.handleChange} />
                 </label>
-                <Button variant='primary'>Submit</Button>
+                <Button variant='primary' onSubmit={this.props.addNewExpense}>Submit</Button>
             </form>
         );
     }
 }
 
-export default NameForm;
+AgregarGastoForm.propTypes = {
+    addNewExpense = PropTypes.func
+}
+
+export default AgregarGastoForm;
