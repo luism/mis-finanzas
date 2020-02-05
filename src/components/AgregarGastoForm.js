@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap'
 
 class AgregarGastoForm extends Component {
@@ -36,6 +35,7 @@ class AgregarGastoForm extends Component {
             concepto: this.state.concepto,
             monto: this.state.monto
         }
+        this.setState({monto: 0,  concepto:''})
         this.props.addNewExpense(newExpense);
     }
 
@@ -44,20 +44,16 @@ class AgregarGastoForm extends Component {
             <form>
                 <label>
                     Concepto:
-                    <input type='text' onKeyPress={this.handleChangeConcepto} />
+                    <input type='text' value={this.state.concepto} onChange={this.handleChangeConcepto} />
                 </label>
                 <label>
                     Monto:
-                    <input type='text' onKeyPress={this.handleChangeMonto} />
+                    <input type='text' value={this.state.monto} onChange={this.handleChangeMonto} />
                 </label>
                 <Button variant='primary' onClick={this.handleSubmit}>Submit</Button>
             </form>
         );
     }
-}
-
-AgregarGastoForm.propTypes = {
-    addNewExpense: PropTypes.func
 }
 
 export default AgregarGastoForm;
