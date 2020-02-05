@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap'
 
 class AgregarGastoForm extends Component {
@@ -39,7 +40,7 @@ class AgregarGastoForm extends Component {
 }
 
 AgregarGastoForm.propTypes = {
-    addNewExpense = PropTypes.func
+    addNewExpense: PropTypes.func
 }
 
 export default AgregarGastoForm;
