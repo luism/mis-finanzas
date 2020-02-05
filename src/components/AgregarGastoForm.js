@@ -5,35 +5,52 @@ import { Button } from 'react-bootstrap'
 class AgregarGastoForm extends Component {
     constructor(props) {
         super(props)
-        this.status = {
-            value: {
+        this.state = {
                 concepto: '',
                 monto: 0
-            }
         }
+        this.handleChangeConcepto = this.handleChangeConcepto.bind(this);
+        this.handleChangeMonto = this.handleChangeMonto.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleChangeMonto(event) {
+        let expense = {
+            concepto: this.state.concepto,
+            monto: event.target.value
+        }
+        this.setState(expense);
+    }
+
+    handleChangeConcepto(event) {
+        let expense = {
+            concepto: event.target.value,
+            monto: this.state.monto
+        }
+        this.setState(expense);
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
-        event.prevenDefault();
+        event.preventDefault();
+        let newExpense = {
+            concepto: this.state.concepto,
+            monto: this.state.monto
+        }
+        this.props.addNewExpense(newExpense);
     }
 
     render() {
         return (
-            <form className='' onSubmit={this.handleSubmit}>
+            <form>
                 <label>
                     Concepto:
-                    <input type='text' value={this.state.value.concepto} onChange={this.handleChange} />
+                    <input type='text' onKeyPress={this.handleChangeConcepto} />
                 </label>
                 <label>
                     Monto:
-                    <input type='text' value={this.state.value.monto} onChange={this.handleChange} />
+                    <input type='text' onKeyPress={this.handleChangeMonto} />
                 </label>
-                <Button variant='primary' onSubmit={this.props.addNewExpense}>Submit</Button>
+                <Button variant='primary' onClick={this.handleSubmit}>Submit</Button>
             </form>
         );
     }

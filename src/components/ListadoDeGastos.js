@@ -1,39 +1,28 @@
-import React, {Component} from 'react'
+// Packages
+import React from 'react'
 
-class ListadoDeGastos extends Component {
-    constructor(props) {
-        super(props); /* Ejecute el constructor de la clase padre, en este caso la clase Component */
-        var gastos = [
-            {
-                concepto: "Super",
-                monto: "5000"
-            },
-            {
-                concepto: "Nafta",
-                monto: "1000"
-            }
-        ];
-        this.state = {
-            gastos: gastos
-        };
-    }
+// Components
+import Gasto from '../components/Gasto'
 
-    render() {
+const ListadoDeGastos = function(props) {
+    let gastos = props.expenseList
+
+    const listadoDeGastos = gastos.map(function(gasto, i){
         return (
+            <Gasto key={i} concepto={gasto.concepto}
+                   monto={gasto.monto}
+            />
+        );
+    })
+
+    return (
+        <div>
             <ul>
-                <li>{this.state.gastos[0].concepto} {this.state.gastos[0].monto}</li>
-                <li>{this.state.gastos[1].concepto} {this.state.gastos[1].monto}</li>
+                {listadoDeGastos}
             </ul>
-        )
-    }
+        </div>
+    )
 
-    handleChange() {
-        // this.setState({gastos: {}})
-    }
-
-    handleSubmit() {
-
-    }
 }
 
 export default ListadoDeGastos
